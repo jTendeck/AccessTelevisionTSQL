@@ -1,0 +1,29 @@
+System Description
+This database design is intended to keep track of shows as well as volunteers working for access television stations. Access television stations means the content that is aired is created with the help of staff and volunteers and is related to community events and organizations. Most access television stations must follow regulations put in place by the Canadian Radio-television and Telecommunications Commission (CRTC). The CRTC looks at information from access television stations in order to guide decision making related to funding and what content is permissible. Access television stations must provide the CRTC with information such as the amount of volunteer hours put into their productions, and the amount of times certain shows have aired. The reports generated from this database will help the CRTC with their decision making and make it easier for access stations to keep track of volunteers.
+There are numerous access stations throughout western Canadian. Each station houses the equipment and space necessary to make television possible, and each station has one or several channels. Channels are what people tune into to watch TV, and each channel may have numerous shows that may air multiple times throughout the day or week. It is important for a station to track not only what is airing, but the number of times it is set to air, along with what station(s) it airs it.
+Stations may employ several access producers. Access producers (AP) are essentially the managers of the shows that make it to air. Shows may be created by access producers/staff, or they may come from volunteers in the community. Access producers are the ones that make sure each show follows CRTC regulations, and they may be responsible for finding crew members (ie: staff and volunteers) to help work on certain shows. If a show is approved by the access producer, production may begin, and once done, it will air on the station’s channel. Certain shows may air at multiple stations as well.
+A show may or may not have one or more season, but some shows are one-time events and may have only one episode. It is also important to track the class of each episode. A show class essentially tells what percentage of a show was made with the help of staff versus the number of volunteers. For example, a show that was made exclusively with 100% volunteers as crew members may be class ‘A’, a show with 80% volunteer help and 20% staff help may be class ‘B’, and so on.
+Once a show is approved and preproduction is complete, shooting may begin. Most show creators need more hands to help with shooting, so they ask for the help of show personnel, which stations keeps track of. Show personnel (SP) may be either station staff or volunteers that are assigned a task or multiple tasks to help with a certain shoot. A shoot occurs at a certain location at a certain time, and footage gathered at a shoot may be for one or more show episodes. A task includes a production related job such as camera operator, floor director, soundboard operator, and so on. It is also important to track which show personnel are staff or volunteers, and how many hours they work on certain productions, and the total number of hours they have worked.
+
+Business Rules
+A STATION may or may not employ many ACCESS PRODUCERS.
+An ACCESS PRODUCER must work at one and only one STATION.
+A STATION must have one or many CHANNELS.
+A CHANNEL must belong to one and only one STATION.
+A CHANNEL may or may not air many SHOWS.
+A SHOW may or may not air on many CHANNELS.
+An ACCESS PRODUCER may or may not manage many SHOWS.
+A SHOW must be managed by one or many ACCESS PRODUCERS.
+A SHOW may or may not have one or more SEASON.
+A SEASON must belong to one and only one SHOW.
+A SHOW may or may not have many EPISODES.
+An EPISODE must belong to a single SHOW.
+An EPISODE may or may not have many SHOOTS.
+A SHOOT may or may not be for many EPISODES.
+A SHOOT may or may not have many SHOW PERSONNEL.
+A SHOW PERSON may or may not work on many SHOWS.
+A SHOW PERSON may or may not have many TASKS.
+A TASK may or may not be worked by many SHOW PERSONNEL.
+
+Note: 
+Regarding the SHOW PERSONNEL and CREW MEMBER entities, the “IS_STAFF” attribute exists as an intentional redundancy. This is in order to facilitate correct historical tracking of volunteer versus staff hours. Within the SHOW PERSONNEL entity, there exists a “TOTAL_HOURS” attribute which is the total number of hours that SP has worked on show productions. However, it is possible for a volunteer to become staff. If that were the case, their volunteer hours would be converted into staff hours, which we don’t want. Therefore, an “IS_STAFF” and “HOURS_WORKED” attribute exists within the CREW MEMBER bridge entity, so when it comes time to report volunteer hours to the CRTC, they may be obtained from the CREW MEMBER entity instead. “IS_STAFF” also exists within the SHOW PERSONNEL entity in order to make it so the list can be filtered by volunteers and staff, which is useful in case a show creator wants to use more volunteers versus staff on their production.
